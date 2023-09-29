@@ -1,12 +1,15 @@
 package com.example.LibrarymanagementSystem.service;
 
 import com.example.LibrarymanagementSystem.Enum.CardStatus;
+import com.example.LibrarymanagementSystem.Enum.Gender;
 import com.example.LibrarymanagementSystem.model.LibraryCard;
 import com.example.LibrarymanagementSystem.repository.StudentRepository;
 import com.example.LibrarymanagementSystem.model.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -32,5 +35,14 @@ public class StudentService {
             return studentOptional.get();
         }
         return null;
+    }
+
+    public List<String> getAllMales() {
+      List<String> names= new ArrayList<>();
+      List<Student> students =studentRepository.findByGender(Gender.MALE);
+      for(Student s:students){
+          names.add(s.getName());
+      }
+      return names;
     }
 }
